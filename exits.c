@@ -42,9 +42,10 @@ char *_strncpy(char *dest, char *src, int n)
 char *_strncat(char *dest, char *src, int n)
 {
     char *s = dest;
+	int kj,i;
 
     int dest_len = strlen(dest);
-    int kj= i =0;
+    kj = i = 0;
 
     while (src[i] != '\0' && kj< n)
     {
