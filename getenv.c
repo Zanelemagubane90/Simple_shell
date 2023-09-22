@@ -24,11 +24,11 @@ char **get_environ(info_t *info)
  *
  * Return: 1 on delete, 0 otherwise.
  */
-int _unsetenv(info_t *info, const char *var)
+int _unsetenv(info_t *info,  char *var)
 {
     list_t *ndjs = info->env;
     size_t kj = 0;
-    const char *p;
+    char *p;
 
     if (!ndjs || !var)
         return 0;
@@ -57,11 +57,11 @@ int _unsetenv(info_t *info, const char *var)
  *
  * Return: Always returns 0.
  */
-int _setenv(info_t *info, const char *var, const char *value)
+int _setenv(info_t *info,  char *var,  char *value)
 {
     char *buf = NULL;
     list_t *ndjs;
-    const char *p;
+     char *p;
 
     if (!var || !value)
         return 0;
