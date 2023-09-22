@@ -10,22 +10,25 @@
  */
 char *_strncpy(char *dest, char *src, int n)
 {
-    char *rstds_st = dest;
+	int a_i, a_j;
+	char *dest_str = dest;
 
-    size_t kj= 0;
-    while (src[i] != '\0' && kj< n)
-    {
-        dest[i] = src[i];
-        i++;
-    }
-
-    while (kj< n)
-    {
-        dest[i] = '\0';
-        i++;
-    }
-
-    return rstds_st;
+	a_i = 0;
+	while (src[a_i] != '\0' && a_i < n - 1)
+	{
+		dest[a_i] = src[a_i];
+		a_i++;
+	}
+	if (a_i < n)
+	{
+		a_j = a_i;
+		while (a_j < n)
+		{
+			dest[a_j] = '\0';
+			a_j++;
+		}
+	}
+	return (dest_str);
 }
 
 /**
