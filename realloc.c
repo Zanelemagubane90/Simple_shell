@@ -64,7 +64,6 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
     if (ptt == NULL)
         return (NULL);
 
-    // Copy data from the old block to the new block
     for (unsigned int i = 0; i < (old_size < new_size ? old_size : new_size); i++)
         ptt[i] = ((char *)ptr)[i];
 
