@@ -34,7 +34,7 @@ int _eputchar(char c)
 
     if (c == BUF_FLUSH || in >= WRITE_BUF_SIZE)
     {
-        write(2, buf, in); // Write to stderr (file descriptor 2)
+        write(2, buf, in); 
         in = 0;
     }
 
