@@ -2,99 +2,88 @@
 
 /**
  * is_cmd - determines if a file is an executable command
+ * @info_struct: the info struct
  * @path: path to the file
  *
  * Return: 1 if true, 0 otherwise
  */
-int is_cmd(const char *path)
+
+int is_cmd(info_t *info_struct, char *path)
 {
-    struct stat st;
+	struct stat st;
 
-    if (path == NULL || stat(path, &st) == -1)
-        return 0;
+	(void)info_struct;
+	if (path == NULL || stat(path, &st))
+		return (false_status);
 
-    return S_ISREG(st.st_mode);
+	if (st.st_mode & S_IFREG)
+	{
+		return (true_status);
+	}
+	return (false_status);
 }
 
 /**
- * extract_path_segment - extracts a the_seg from the PATH string
- * @path_str: the PATH string
+ * dup_chars - duplicates characters
+ * @pathstr: the PATH string
  * @start: starting index
  * @stop: stopping index
  *
- * Return: dynamically allocated buffer containing the the_seg
+ * Return: pointer to new buffer
  */
-char *extract_path_segment(const char *path_str, int start, int stop)
+
+char *dup_chars(char *pathstr, int start, int stop)
 {
-    if (!path_str || start < 0 || stop < start)
-        return NULL;
+	static char buf[1024];
+	int index = none, k = none;
 
-    int length = stop - start;
-    char *the_seg = malloc(length + 1);
-
-    if (!the_seg)
-        return NULL;
-
-    for (int i = start, j = 0; i < stop; i++, j++) {
-        if (path_str[i] != ':')
-            the_seg[j] = path_str[i];
-        else
-            the_seg[j] = '/';
-    }
-
-    the_seg[length] = '\0';
-    return the_seg;
+	for (k = none, index = start; index < stop; index++)
+		if (pathstr[index] != ':')
+			buf[k++] = pathstr[index];
+	buf[k] = none;
+	return (buf);
 }
 
 /**
- * find_executable - finds the full path of an executable command in PATH
- * @path_str: the PATH string
- * @cmmd: the command to find
+ * find_path - finds this cmd in the PATH string
+ * @info_struct: the info struct
+ * @pathstr: the PATH string
+ * @cmd: the cmd to find
  *
- * Return: full path of cmmd if found, NULL otherwise
+ * Return: full path of cmd if found or NULL
  */
-char *find_executable(const char *path_str, const char *cmmd)
+
+char *find_path(info_t *info_struct, char *pathstr, char *cmd)
 {
-    if (!path_str || !cmmd)
-        return NULL;
+	int index = none, position = none;
+	char *the_path;
 
-    if (is_cmd(cmmd))
-        return strdup(cmmd);
-
-    int start = 0, stop = 0;
-    char *the_seg = NULL;
-
-    while (path_str[start] != '\0') {
-        if (path_str[start] == ':')
-            start++;
-        else {
-            stop = start;
-            while (path_str[stop] != '\0' && path_str[stop] != ':')
-                stop++;
-            the_seg = extract_path_segment(path_str, start, stop);
-            if (!the_seg)
-                return NULL;
-
-            char *path_full = malloc(strlen(the_seg) + strlen(cmmd) + 2);
-            if (!path_full) {
-                free(the_seg);
-                return NULL;
-            }
-
-            strcpy(path_full, the_seg);
-            strcat(path_full, "/");
-            strcat(path_full, cmmd);
-
-            if (is_cmd(path_full)) {
-                free(the_seg);
-                return path_full;
-            }
-
-            free(the_seg);
-            free(path_full);
-            start = stop;
-        }
-    }
-
-    return NULL;
+	if (!pathstr)
+		return (NULL);
+	if ((_strlen(cmd) > 2) && starts_with(cmd, "./"))
+	{
+		if (is_cmd(info_struct, cmd))
+			return (cmd);
+	}
+	while (1)
+	{
+		if (!pathstr[index] || pathstr[index] == ':')
+		{
+			the_path = dup_chars(pathstr, position, index);
+			if (!*the_path)
+				_strcat(the_path, cmd);
+			else
+			{
+				_strcat(the_path, "/");
+				_strcat(the_path, cmd);
+			}
+			if (is_cmd(info_struct, the_path))
+				return (the_path);
+			if (!pathstr[index])
+				break;
+			position = index;
+		}
+		index++;
+	}
+	return (NULL);
 }
