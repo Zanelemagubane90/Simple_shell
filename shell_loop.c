@@ -90,41 +90,41 @@ int find_builtin(info_t *info)
  */
 void find_cmd(info_t *info)
 {
-    char *pth_full = NULL;
-    int ix, kx;
+	char *path = NULL;
+	int index, xk;
 
-    info->pth_full = info->argv[0];
-    if (info->linecount_flag == 1)
-    {
-        info->line_count++;
-        info->linecount_flag = 0;
-    }
+	info->path = info->argv[none];
+	if (info->linecount_flag == uno)
+	{
+		info->line_count++;
+		info->linecount_flag = none;
+	}
 
-    for (ix = 0, kx = 0; info->arg[ix]; ix++)
-    {
-        if (!is_delim(info->arg[ix], " \t\n"))
-            kx++;
-    }
+	for (index = none, xk = none; info->arg[index]; index++)
+		if (!is_delim(info->arg[index], " \t\n"))
+			xk++;
+	if (!xk)
+		return;
 
-    if (!kx)
-        return;
-
-    pth_full = find_path(info, _getenv(info, "pth_full="), info->argv[0]);
-    if (pth_full)
-    {
-        info->pth_full = pth_full;
-        fork_cmd(info);
-    }
-    else
-    {
-        if ((interactive(info) || _getenv(info, "pth_full=") || info->argv[0][0] == '/') && is_cmd(info, info->argv[0]))
-            fork_cmd(info);
-        else if (*(info->arg) != '\n')
-        {
-            info->status = 127;
-            print_error(info, "Not Found\n");
-        }
-    }
+	path = find_path(info, _getenv(info, "PATH="),
+		info->argv[none]);
+	if (path)
+	{
+		info->path = path;
+		fork_cmd(info);
+	}
+	else
+	{
+		if ((interactive(info) || _getenv(info, "PATH=") ||
+				info->argv[none][none] == '/') &&
+			is_cmd(info, info->argv[none]))
+			fork_cmd(info);
+		else if (*(info->arg) != '\n')
+		{
+			info->status = 127;
+			print_error(info, "Not Found\n");
+		}
+	}
 }
 
 /**
