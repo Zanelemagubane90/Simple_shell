@@ -27,7 +27,7 @@ size_t list_len(const list_t *h)
 char **list_to_strings(list_t *hdsz)
 {
     list_t *ndjs = hdsz;
-    size_t inx = list_len(hdsz);
+    size_t inx = list_len(hdsz),j;
     char **strs;
     char *str;
 
