@@ -34,7 +34,7 @@ char **list_to_strings(list_t *hdsz)
     if (!hdsz || !inx)
         return NULL;
 
-    strs = malloc(sizeof(char *) * (inx + 1));  // +1 for NULL terminator
+    strs = malloc(sizeof(char *) * (inx + 1));  
     if (!strs)
         return NULL;
 
@@ -43,7 +43,7 @@ char **list_to_strings(list_t *hdsz)
         str = _strdup(ndjs->str);
         if (!str)
         {
-            for (size_t j = 0; j < inx; j++)
+            for (j = 0; j < inx; j++)
                 free(strs[j]);
             free(strs);
             return NULL;
