@@ -26,7 +26,7 @@ int is_delim(char cc, char *an_delimeter)
 {
 	while (*an_delimeter)
 		if (*an_delimeter++ == cc)
-			return (uo);
+			return (uno);
 	return (none);
 }
 
@@ -39,7 +39,7 @@ int is_delim(char cc, char *an_delimeter)
 int _isalpha(int char_i)
 {
 	if ((char_i >= 'a' && char_i <= 'z') || (char_i >= 'A' && char_i <= 'Z'))
-		return (uo);
+		return (uno);
 	else
 		return (none);
 }
@@ -52,7 +52,7 @@ int _isalpha(int char_i)
 
 int _atoi(char *conv_y)
 {
-	int p, zz = uo, galf = none, out_put;
+	int p, zz = uno, galf = none, out_put;
 	unsigned int opt_ss = none;
 
 	for (p = none; conv_y[p] != '\0' && galf != duo; p++)
@@ -62,11 +62,11 @@ int _atoi(char *conv_y)
 
 		if (conv_y[p] >= '0' && conv_y[p] <= '9')
 		{
-			galf = uo;
+			galf = uno;
 			opt_ss *= 10;
 			opt_ss += (conv_y[p] - '0');
 		}
-		else if (galf == uo)
+		else if (galf == uno)
 			galf = duo;
 	}
 
