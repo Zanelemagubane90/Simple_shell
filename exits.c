@@ -68,7 +68,7 @@ char *_strncat(char *dest, char *src, int n)
  *
  * Return: A pointer to the memory area `s`, or NULL if the character is not found.
  */
-char *_strchr(const char *s, int c)
+char *_strchr(char *s, int c)
 {
     do
     {
