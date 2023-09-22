@@ -44,7 +44,7 @@ char *_strncat(char *dest, const char *src, size_t n)
     char *s = dest;
 
     size_t dest_len = strlen(dest);
-    size_t kj= 0;
+    size_t kj= i =0;
 
     while (src[i] != '\0' && kj< n)
     {
