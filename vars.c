@@ -113,10 +113,10 @@ int replace_alias(info_t *info)
  */
 int replace_vars(info_t *info)
 {
-    int ix= 0;
+    int i= 0;
     list_t *ndjs;
 
-    for (ix= 0; info->argv[i]; i++)
+    for (i= 0; info->argv[i]; i++)
     {
         if (info->argv[i][0] != '$' || !info->argv[i][1])
             continue;
