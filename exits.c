@@ -68,13 +68,12 @@ char *_strncat(char *dest, char *src, int n)
  *
  * Return: A pointer to the memory area `s`, or NULL if the character is not found.
  */
-char *_strchr(char *s, int c)
+char *_strchr(char *s, char c)
 {
-    do
-    {
-        if (*s == (char)c)
-            return (char *)s;
-    } while (*s++ != '\0');
+    do {
+		if (*s == c)
+			return (s);
+	} while (*s++ != '\0');
 
-    return NULL;
+	return (NULL);
 }
